@@ -31,6 +31,7 @@ class ProfileModelTests(TestCase):
         User = get_user_model()
         user = User.objects.create()
         profile = createProfile(user, "Bob", "example.com", "Student", timezone.now())
+        print("\nRunning unit tests for Profiles")
         self.assertIs(str(profile), profile.full_name)
 
     def test_create_profile_with_future_date(self):
@@ -79,7 +80,7 @@ class ProfileGETTests(TestCase):
 
 
 class ProfilePOSTTests(TestCase):
-    @unittest.skip("Temporarily skipping this test ")
+    # @unittest.skip("Temporarily skipping this test ")
     def test_post_with_valid_parameters(self):
         """
         Verify that posting all required profile fields (excluding profile_id) successfully creates a profile
@@ -89,7 +90,6 @@ class ProfilePOSTTests(TestCase):
         user1 = User.objects.create(username="Bob")
 
         url = reverse("profiles:profile-list")
-        print(url)
         payload = json.dumps(
             {
                 "user_id": user1.id,
@@ -99,10 +99,8 @@ class ProfilePOSTTests(TestCase):
                 "created_at": timezone.now().isoformat(),
             }
         )
-        with self.settings(APPEND_SLASH=False):
-            response = self.client.post(
-                url, data=payload, content_type="application/json", follow=True
-            )
+        response = self.client.post(
+            url, data=payload, content_type="application/json", follow=True)
 
         self.assertEqual(response.status_code, 201)
         self.assertIn("profile_id", response.json())
