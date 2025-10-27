@@ -27,7 +27,7 @@ def createEvent():
     location = "School"
     event = Event.objects.create(
         event_id = e_uuid,
-        title = "Test",
+        title = "Meeting",
         description = "test",
         start_time = start_time,
         end_time = end_time,
