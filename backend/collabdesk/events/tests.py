@@ -9,6 +9,7 @@ from django.contrib.auth import get_user_model
 from django.urls import reverse
 from rest_framework.test import APIClient
 
+
 def createEvent():
     e_uuid = uuid.uuid4()
     User = get_user_model()
@@ -17,7 +18,7 @@ def createEvent():
     workspace = Workspace.objects.create(
         name="CollabDesk Workspace",
         description="Main workspace for CollabDesk project",
-        created_by = user,
+        created_by=user,
     )
     created_at = timezone.now()
     updated_at = created_at
@@ -26,25 +27,27 @@ def createEvent():
     event_type = "GROUP"
     location = "School"
     event = Event.objects.create(
-        event_id = e_uuid,
-        title = "Meeting",
-        description = "test",
-        start_time = start_time,
-        end_time = end_time,
-        event_type = event_type,
-        location = location,
-        created_by = user,
-        workspace_id = workspace,
-        created_at = created_at,
-        updated_at = updated_at,
+        event_id=e_uuid,
+        title="Meeting",
+        description="test",
+        start_time=start_time,
+        end_time=end_time,
+        event_type=event_type,
+        location=location,
+        created_by=user,
+        workspace_id=workspace,
+        created_at=created_at,
+        updated_at=updated_at,
     )
 
     return event
-    
+
+
 class EventModelTests(TestCase):
     def test_create_event_and_str_method(self):
         event = createEvent()
         self.assertEqual(str(event), event.title)
+
 
 class EventAPITests(TestCase):
     def setUp(self):
@@ -80,7 +83,7 @@ class EventAPITests(TestCase):
 
         # Assertions
         self.assertEqual(response.status_code, 200)
-        
+
     def test_get_with_event_id_uuid(self):
         event = createEvent()
         client = APIClient()
@@ -89,7 +92,7 @@ class EventAPITests(TestCase):
         url = reverse("events:event-detail", args=(event.event_id,))
         response = client.get(url, follow=True)
         self.assertEqual(response.status_code, 200)
-        
+
     def test_get_without_event_id_uuid(self):
         event = createEvent()
         client = APIClient()
@@ -98,7 +101,7 @@ class EventAPITests(TestCase):
         url = reverse("events:event-list")
         response = client.get(url, follow=True)
         self.assertEqual(response.status_code, 200)
-        
+
 
 class BasicTestCase(TestCase):
     """A simple sanity check to verify test setup."""

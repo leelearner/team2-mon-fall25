@@ -90,7 +90,7 @@ class ProfilePOSTTests(TestCase):
         user1 = User.objects.create()
         print(user1.id)
 
-        url = ("/api/profiles/")
+        url = "/api/profiles/"
         response = self.client.post(
             url,
             data=json.dumps(

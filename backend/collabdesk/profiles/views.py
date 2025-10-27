@@ -11,7 +11,6 @@ class ProfileListCreateView(generics.ListCreateAPIView):
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
 
-
     def get(self, request, *args, **kwargs):
         print(request.method)
         profile_id = request.query_params.get("profile_id")
