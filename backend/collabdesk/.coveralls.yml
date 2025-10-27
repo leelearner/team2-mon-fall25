@@ -1,3 +1,4 @@
 # Change the Repo_token value with your Coveralls Repository Token while testing
-repo_token: bpKwoQkJHEsEjRQsQAgGNqc1KqzUaYpi4
+# repo_token: bpKwoQkJHEsEjRQsQAgGNqc1KqzUaYpi4
+repo_tokenrepo_token: d8Dvf47d2iK3cEm9yfRJ8ok9bSEG0CfBf
 service_name: travis-pro
